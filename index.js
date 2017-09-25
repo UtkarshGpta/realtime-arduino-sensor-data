@@ -20,10 +20,10 @@ app.post("/post_data", function(request, response) {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     
-    var current = request.query.current
-    var temperature = request.query.temperature
-    var voltage = request.query.voltage
-    var moisture_content = request.query.moisture_content
+    var current = request.body.current
+    var temperature = request.body.temperature
+    var voltage = request.body.voltage
+    var moisture_content = request.body.moisture_content
 
     /* Insert element in database */
     
