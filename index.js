@@ -3,7 +3,7 @@ express = require("express")
 bodyParser = require('body-parser')
 MongoClient = require('mongodb').MongoClient
 
-var url = "mongodb://utkarsh:moneyball@ds147864.mlab.com:47864/heroku_w3mw9ds3"
+var url = MONGODB_URI
 var app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,12 +27,12 @@ app.post("/post_data", function(request, response) {
 
     /* Insert element in database */
     
-    // db.collection('tf1').insert({
-    //   'current': current,
-    //   'temperature': temperature,
-    //   'voltage': voltage,
-    //   'moisture_content': moisture_content
-    // });
+    db.collection('tf1').insert({
+      'current': current,
+      'temperature': temperature,
+      'voltage': voltage,
+      'moisture_content': moisture_content
+    });
 
     response.end("POST Request Successful!");
   });
