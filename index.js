@@ -6,6 +6,8 @@ var app = express();
 //   next();
 // });
 
+app.set('port', (process.env.PORT || 5000));
+
 app.get("/", function(request, response) {
 	response.send("Welcome to Homepage!");
 });
