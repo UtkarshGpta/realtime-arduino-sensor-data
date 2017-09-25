@@ -3,7 +3,7 @@ express = require("express")
 bodyParser = require('body-parser')
 MongoClient = require('mongodb').MongoClient
 
-var url = MONGODB_URI
+var url = "mongodb://utkarsh:moneyball@ds147864.mlab.com:47864/heroku_w3mw9ds3"
 var app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }));
