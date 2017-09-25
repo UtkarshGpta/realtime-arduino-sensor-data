@@ -1,0 +1,23 @@
+{
+  "name": "remote-sensor-data-pi",
+  "version": "1.0.0",
+  "description": "Retrieve sensor data and display it on web client.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UtkarshGpta/remote-sensor-data-pi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UtkarshGpta/remote-sensor-data-pi/issues"
+  },
+  "homepage": "https://github.com/UtkarshGpta/remote-sensor-data-pi#readme",
+  "dependencies": {
+    "express": "^4.15.5",
+    "mongodb": "^2.2.31"
+  }
+}
