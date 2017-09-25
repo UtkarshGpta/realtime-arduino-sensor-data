@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/UtkarshGpta/remote-sensor-data-pi#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.15.5",
     "mongodb": "^2.2.31"
   }

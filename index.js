@@ -1,36 +1,45 @@
-var express = require("express");
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://heroku_w3mw9ds3:1pt1npmhd9tvcde69jdjj03o61@ds147864.mlab.com:47864/heroku_w3mw9ds3";
-var app = express();
+const
+express = require("express")
+bodyParser = require('body-parser')
+MongoClient = require('mongodb').MongoClient
 
-// app.all("*", function(request, response, next) {
-//   response.writeHead(200, { "Content-Type": "text/plain" });
-//   next();
-// });
+var url = "mongodb://utkarsh:moneyball@ds147864.mlab.com:47864/heroku_w3mw9ds3"
+var app = express()
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 5000));
 
-app.get("/", function(request, response) {
+app.get("/", function(request, response, next) {
 	response.send("Welcome to Homepage!");
 });
 
-app.get("/post_data", function(request, response) {
-  console.log("Entered Get");
-  console.log(request.query);
+app.post("/post_data", function(request, response) {
+  console.log(request.body)
   MongoClient.connect(url, function(err, db) {
-    if (err) throw err; 
-    db.collection('tf1').insert({
-      'current': request.query.current,
-      'temperature': request.query.temperature,
-      'voltage': request.query.voltage,
-      'moisture_content': request.query.moisture_content
-    });
+    if (err) throw err;
+    
+    var current = request.query.current
+    var temperature = request.query.temperature
+    var voltage = request.query.voltage
+    var moisture_content = request.query.moisture_content
+
+    /* Insert element in database */
+    
+    // db.collection('tf1').insert({
+    //   'current': current,
+    //   'temperature': temperature,
+    //   'voltage': voltage,
+    //   'moisture_content': moisture_content
+    // });
+
+    response.end("POST Request Successful!");
   });
-  response.send("Welcome to the about page!");
 });
 
 app.get("*", function(request, response) {
-  response.send("404!");
+  response.send("Error 404");
 });
 
 app.listen(app.get('port'), function() {
