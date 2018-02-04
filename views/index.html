@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Transformer Data Visualization</title>
-	<link type="text/css" rel="stylesheet" href="//pubnub.github.io/eon/v/eon/1.0.0/eon.css" />
 </head>
 <body>
 	<script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
@@ -12,7 +11,7 @@
 		var __eon_pubnub = new PubNub({
 		  subscribeKey: "sub-c-3ca2653c-09dc-11e8-8425-92777572ae45"
 		});
-		var __eon_cols = ["current","temperature","voltage","moisture_content"]; 
+		var __eon_cols = ["voltage","current","temperature","moisture_content"]; 
 		var __eon_labels = {}; 
 		chart = eon.chart({
 		  pubnub: __eon_pubnub,
@@ -20,11 +19,11 @@
 		  history: false,
 		  flow: true,
 		  rate: 1000,
-		  limit: 2,0face
+		  limit: 10,
 		  generate: {
 		    bindto: "#chart",
 		    data: {
-		      colors: {"current":"#D70060","temperature":"#E54028","voltage":"#F18D05","moisture_content":"#113F8C"},
+		      colors: {"voltage":"#D70060","current":"#E54028","temperature":"#F18D05","moisture_content":"#113F8C"},
 		      type: "spline"
 		    },
 		    transition: {
@@ -32,7 +31,7 @@
 		    },
 		    axis: {
 		      x: {
-		        label: ""
+		        label: "Time"
 		      },
 		      y: {
 		        label: ""
