@@ -1,18 +1,24 @@
+var PubNub = require('pubnub');
 var express = require("express");
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-var app = express();
 var path = require('path');
 var config = require('./config.js');
+
+var app = express();
 var date = new Date();
-var PubNub = require('pubnub');
 
 var pubnub = new PubNub({
-  publishKey : 'pub-c-b05337d3-6133-4097-9fcd-d2acdfdd9e77',
-  subscribeKey : 'sub-c-22ea1e5a-099b-11e8-8425-92777572ae45'
+  publishKey : (process.env.PUBNUB_PUBLISH_KEY) ? process.env.PUBNUB_PUBLISH_KEY : config.pubsub.publishKey ,
+  subscribeKey : (process.env.PUBNUB_SUBSCRIBE_KEY) ? process.env.PUBNUB_SUBSCRIBE_KEY : config.pubsub.subscribeKey
 });
 
-var db_url = "mongodb://localhost:27017";
+var db_url;
+
+if (process.env.MONGODB_URI) db_url = process.env.MONGODB_URI;
+else db_url = config.db.localhost + ':' + config.db.port;
+
+console.log(db_url)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -33,6 +39,7 @@ MongoClient.connect(db_url, function(err, cli) {
 });
 
 app.post("/post_data", function(request, response) {
+  console.log(client)
   var db = client.db(config.db.name);
   var timestamp = request.body.timestamp;
   var current = request.body.current;
@@ -70,7 +77,7 @@ app.post("/post_data", function(request, response) {
     'moisture_content': moisture_content
   };
 
-  db.collection('tf1').insert(insert_data, function(err){
+  db.collection('tf1-data').insert(insert_data, function(err){
       if(err) throw err;
       console.log("Inserted");
   });
