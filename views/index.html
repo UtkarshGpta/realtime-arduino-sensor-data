@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Transformer Data Visualization</title>
+	<link type="text/css" rel="stylesheet" href="//pubnub.github.io/eon/v/eon/1.0.0/eon.css" />
+</head>
+<body>
+	<script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css" />
+	<div id="chart"></div>
+	<script type="text/javascript">
+		var __eon_pubnub = new PubNub({
+		  subscribeKey: "sub-c-22ea1e5a-099b-11e8-8425-92777572ae45"
+		});
+		var __eon_cols = ["current","temperature","voltage","moisture_content"]; 
+		var __eon_labels = {}; 
+		chart = eon.chart({
+		  pubnub: __eon_pubnub,
+		  channels: ["transformer_data"],
+		  history: false,
+		  flow: true,
+		  rate: 1000,
+		  limit: 2,0face
+		  generate: {
+		    bindto: "#chart",
+		    data: {
+		      colors: {"current":"#D70060","temperature":"#E54028","voltage":"#F18D05","moisture_content":"#113F8C"},
+		      type: "spline"
+		    },
+		    transition: {
+		      duration: 250
+		    },
+		    axis: {
+		      x: {
+		        label: ""
+		      },
+		      y: {
+		        label: ""
+		      }
+		    },
+		    grid: {
+		      x: {
+		        show: true 
+		      },
+		      y: {
+		        show: true 
+		      }
+		    },
+		    tooltip: {
+		     show: true
+		    },
+		    point: {
+		      show: true
+		    }
+		  },
+		  transform: function(message) {
+		    var message = eon.c.flatten(message.eon);
+		    var o = {};
+		    for(index in message) {
+		      if(__eon_cols.indexOf(index) > -1){
+		        o[__eon_labels[index] || index] = message[index];
+		      }
+		    }
+		    return {
+		      eon: o
+		    };
+		  }
+		});
+	</script>
+</body>
+</html>
