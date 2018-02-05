@@ -18,8 +18,6 @@ var db_url;
 if (process.env.MONGODB_URI) db_url = process.env.MONGODB_URI;
 else db_url = config.db.localhost + ':' + config.db.port;
 
-console.log(db_url)
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -39,7 +37,6 @@ MongoClient.connect(db_url, function(err, cli) {
 });
 
 app.post("/post_data", function(request, response) {
-  console.log(client)
   var db = client.db(config.db.name);
   var timestamp = request.body.timestamp;
   var current = request.body.current;
@@ -63,9 +60,10 @@ app.post("/post_data", function(request, response) {
   pubnub.publish(publishConfig, function (status, response) {
     if (status.error) {
         console.log("PubNub Error ", status)
-    } else {
-        console.log("message Published w/ timetoken", response.timetoken)
     }
+    // else {
+    //     console.log("message Published w/ timetoken", response.timetoken)
+    // }
   });
 
   /* Insert element in database */
@@ -79,7 +77,7 @@ app.post("/post_data", function(request, response) {
 
   db.collection('tf1-data').insert(insert_data, function(err){
       if(err) throw err;
-      console.log("Inserted");
+      console.log("Data Inserted");
   });
 
   response.end("POST Request Successful!");
