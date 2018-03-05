@@ -1,22 +1,22 @@
 {
-  "name": "remote-sensor-data-pi",
+  "name": "realtime-remote-sensor-data",
   "version": "1.0.0",
-  "description": "Retrieve sensor data and display it on web client.",
-  "main": "index.js",
+  "description": "Retrieve sensor data and display it on web client in realtime.",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UtkarshGpta/remote-sensor-data-pi.git"
+    "url": "git+https://github.com/UtkarshGpta/realtime-remote-sensor-data.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Utkarsh Gupta",
+  "license": "MIT license",
   "bugs": {
-    "url": "https://github.com/UtkarshGpta/remote-sensor-data-pi/issues"
+    "url": "https://github.com/UtkarshGpta/realtime-remote-sensor-data/issues"
   },
-  "homepage": "https://github.com/UtkarshGpta/remote-sensor-data-pi#readme",
+  "homepage": "https://github.com/UtkarshGpta/realtime-remote-sensor-data#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.15.5",
