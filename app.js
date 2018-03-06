@@ -1,3 +1,4 @@
+"use strict";
 var PubNub = require('pubnub');
 var express = require("express");
 var bodyParser = require('body-parser');
@@ -6,7 +7,7 @@ var path = require('path');
 var config = require('./config.js');
 
 var app = express();
-var date = new Date();
+// var date = new Date();
 
 var pubnub = new PubNub({
   publishKey : (process.env.PUBNUB_PUBLISH_KEY) ? process.env.PUBNUB_PUBLISH_KEY : config.pubsub.publishKey ,
@@ -59,11 +60,8 @@ app.post("/post_data", function(request, response) {
 
   pubnub.publish(publishConfig, function (status, response) {
     if (status.error) {
-        console.log("PubNub Error ", status)
+        console.log("PubNub Error ", status);
     }
-    // else {
-    //     console.log("message Published w/ timetoken", response.timetoken)
-    // }
   });
 
   /* Insert element in database */

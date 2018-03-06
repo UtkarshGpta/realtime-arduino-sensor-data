@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Transformer Data Visualization</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+	<div class="container">
+		<div class="text-center">
+			<h1>RealTime Sensor Data Dashboard</h1>
+			<button class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#chart" aria-expanded="false" aria-controls="collapseExample">Click here to view Real-Time Graph</button>
+		</div>
+		<br/>
+		<div class="collapse" id="chart">
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="row text-center">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h5><b>Voltage</b></h5>
+						<span id="voltage"></span>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h5><b>Current</b></h5>
+						<span id="current"></span>
+					</div>			
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="row text-center">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h5><b>Temperature</b></h5>
+						<span id="temperature"></span>
+					</div>
+					<br>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h5><b>Moisture Content</b></h5>
+						<span id="moisture_content"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 	<script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css" />
-	<div id="chart"></div>
+	<link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css"/>
+
 	<script type="text/javascript">
 		var __eon_pubnub = new PubNub({
 		  subscribeKey: "sub-c-3ca2653c-09dc-11e8-8425-92777572ae45"
@@ -34,7 +78,7 @@
 		        label: "Time"
 		      },
 		      y: {
-		        label: ""
+		        label: "Sensor Values"
 		      }
 		    },
 		    grid: {
@@ -66,5 +110,31 @@
 		  }
 		});
 	</script>
+
+	
+	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.2.js"></script>
+
+	<script type="text/javascript">
+	    var pubnub = new PubNub({
+	        subscribeKey: 'sub-c-3ca2653c-09dc-11e8-8425-92777572ae45'
+	    });
+
+	    // Subscribe to the demo_tutorial channel
+		pubnub.addListener({
+		    message: function(message){
+		        var sensor_data = message.message.eon;
+		        console.log(sensor_data)
+		        $('#voltage').text(sensor_data.voltage+ " V");
+		        $('#current').text(sensor_data.current+ " A");
+		        $('#temperature').text(sensor_data.temperature+ " Celsius");
+		        $('#moisture_content').text(sensor_data.moisture_content+ " %");
+		    }
+		})
+
+		pubnub.subscribe({
+		    channels: ['transformer_data']
+		});
+	</script>
+
 </body>
 </html>
