@@ -39,11 +39,11 @@ MongoClient.connect(db_url, function(err, cli) {
 
 app.post("/post_data", function(request, response) {
   var db = client.db(config.db.name);
-  var timestamp = request.body.timestamp;
-  var current = request.body.current;
-  var temperature = request.body.temperature;
-  var voltage = request.body.voltage;
-  var moisture_content = request.body.moisture_content;
+  var timestamp = request.query.timestamp;
+  var current = request.query.current;
+  var temperature = request.query.temperature;
+  var voltage = request.query.voltage;
+  var moisture_content = request.query.moisture_content;
 
   /* Publish data to PubNub to dynamically vizualise sensor values */
   var publish_data = {
