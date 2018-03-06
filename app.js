@@ -37,7 +37,7 @@ MongoClient.connect(db_url, function(err, cli) {
   console.log("DB Connected");
 });
 
-app.post("/post_data", function(request, response) {
+app.get("/post_data", function(request, response) {
   var db = client.db(config.db.name);
   var timestamp = request.query.timestamp;
   var current = request.query.current;
@@ -78,7 +78,7 @@ app.post("/post_data", function(request, response) {
       console.log("Data Inserted");
   });
 
-  response.end("POST Request Successful!");
+  response.end("GET Request Successful!");
 });
 
 app.get("*", function(request, response) {
