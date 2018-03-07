@@ -36,8 +36,8 @@
 					</div>
 					<br>
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h5><b>Moisture Content</b></h5>
-						<span id="moisture_content"></span>
+						<h5><b>Apparent Power</b></h5>
+						<span id="power"></span>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 		var __eon_pubnub = new PubNub({
 		  subscribeKey: "sub-c-3ca2653c-09dc-11e8-8425-92777572ae45"
 		});
-		var __eon_cols = ["voltage","current","temperature","moisture_content"]; 
+		var __eon_cols = ["voltage","current","power","temperature"]; 
 		var __eon_labels = {}; 
 		chart = eon.chart({
 		  pubnub: __eon_pubnub,
@@ -67,7 +67,7 @@
 		  generate: {
 		    bindto: "#chart",
 		    data: {
-		      colors: {"voltage":"#D70060","current":"#E54028","temperature":"#F18D05","moisture_content":"#113F8C"},
+		      colors: {"voltage":"#D70060","current":"#E54028","temperature":"#F18D05","power":"#113F8C"},
 		      type: "spline"
 		    },
 		    transition: {
@@ -127,7 +127,7 @@
 		        $('#voltage').text(sensor_data.voltage+ " V");
 		        $('#current').text(sensor_data.current+ " A");
 		        $('#temperature').text(sensor_data.temperature+ " Celsius");
-		        $('#moisture_content').text(sensor_data.moisture_content+ " %");
+		        $('#power').text(sensor_data.power+ " W");
 		    }
 		})
 

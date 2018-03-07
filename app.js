@@ -41,16 +41,16 @@ app.get("/post_data", function(request, response) {
   var db = client.db(config.db.name);
   var timestamp = request.query.timestamp;
   var current = request.query.current;
-  var temperature = request.query.temperature;
   var voltage = request.query.voltage;
-  var moisture_content = request.query.moisture_content;
+  var temperature = request.query.temperature;
+  var power = request.query.power;
 
   /* Publish data to PubNub to dynamically vizualise sensor values */
   var publish_data = {
     'voltage': voltage,
     'current': current,
-    'temperature': temperature,
-    'moisture_content': moisture_content
+    'power': power,
+    'temperature': temperature
   };
 
   var publishConfig = {
@@ -67,10 +67,10 @@ app.get("/post_data", function(request, response) {
   /* Insert element in database */
   var insert_data = {
     'timestamp': timestamp,
-    'current': current,
-    'temperature': temperature,
     'voltage': voltage,
-    'moisture_content': moisture_content
+    'current': current,
+    'power': power,
+    'temperature': temperature
   };
 
   db.collection('tf1-data').insert(insert_data, function(err){
