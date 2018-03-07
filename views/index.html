@@ -55,7 +55,7 @@
 		var __eon_pubnub = new PubNub({
 		  subscribeKey: "sub-c-3ca2653c-09dc-11e8-8425-92777572ae45"
 		});
-		var __eon_cols = ["voltage","current","power","temperature"]; 
+		var __eon_cols = ["voltage","current","temperature"]; 
 		var __eon_labels = {}; 
 		chart = eon.chart({
 		  pubnub: __eon_pubnub,
@@ -67,7 +67,7 @@
 		  generate: {
 		    bindto: "#chart",
 		    data: {
-		      colors: {"voltage":"#D70060","current":"#E54028","temperature":"#F18D05","power":"#113F8C"},
+		      colors: {"voltage":"#D70060","current":"#E54028","temperature":"#F18D05"},
 		      type: "spline"
 		    },
 		    transition: {
