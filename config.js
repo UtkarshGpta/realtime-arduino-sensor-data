@@ -1,10 +1,9 @@
 var config = {};
-config.webhost = 'CUSTOM_WEBHOST';
 
 config.db = {};
-config.db.name = 'heroku_5pxr3rhr';
+config.db.name = 'LOCAL_DATABASE_NAME';
 config.db.localhost = 'mongodb://localhost';
-config.db.port = 27017;
+config.db.port = 27017;	//Local MongoDB Port Number. Change as required.
 
 config.pubsub = {};
 config.pubsub.publishKey = 'YOUR_PUBSUB_PUBLISHKEY';

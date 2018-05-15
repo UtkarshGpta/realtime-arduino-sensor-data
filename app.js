@@ -7,8 +7,12 @@ var path = require('path');
 var config = require('./config.js');
 
 var app = express();
-// var date = new Date();
 
+/*
+  Set PubNub's publish and subscribe key.
+  If on Heroku, it'll take up the values from process.env
+  else we'll need to hardcode it in config.js
+*/
 var pubnub = new PubNub({
   publishKey : (process.env.PUBNUB_PUBLISH_KEY) ? process.env.PUBNUB_PUBLISH_KEY : config.pubsub.publishKey ,
   subscribeKey : (process.env.PUBNUB_SUBSCRIBE_KEY) ? process.env.PUBNUB_SUBSCRIBE_KEY : config.pubsub.subscribeKey
@@ -39,7 +43,6 @@ MongoClient.connect(db_url, function(err, cli) {
 
 app.get("/post_data", function(request, response) {
   var db = client.db(config.db.name);
-  var timestamp = request.query.timestamp;
   var current = request.query.current;
   var voltage = request.query.voltage;
   var temperature = request.query.temperature;
@@ -60,13 +63,12 @@ app.get("/post_data", function(request, response) {
 
   pubnub.publish(publishConfig, function (status, response) {
     if (status.error) {
-        console.log("PubNub Error ", status);
+      console.log("PubNub Error ", status);
     }
   });
 
   /* Insert element in database */
   var insert_data = {
-    'timestamp': timestamp,
     'voltage': voltage,
     'current': current,
     'power': power,
