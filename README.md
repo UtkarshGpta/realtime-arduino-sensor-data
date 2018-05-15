@@ -52,10 +52,20 @@ Now you'll get a server running at localhost:5000
 Type this in the browser's address bar and you can see the real-time plot on the screen. Perform a GET request to this server and you can see the graph being updated in real-time.
 Example: http://localhost:5000/post_data?voltage=235&current=5.1&temperature=25
 
-
 ## Deployment
 Using above instructions, you get a server running locally. To deploy the application on Heroku, you need to add PubNub and mLab MongoDB as Add-ons under the resources tab. You need not harcode anything as the MongoDB URL, PubNub's Publish and Subscribe Key are taken up from process.env variable of Heroku. 
+
+After adding mLab as an add-on, note down the database name alotted to your account and change the corresponding value of config.db.name in config.js
+
 Integrate GitHub as deployment method and you can deploy the application automatically as soon as you push your changes onto your repository on GitHub.
+
+## Result
+We get a sensor data plot which is updated in real time and can be viewed on any device with an active internet connection.
+
+Below is when viewed on a web browser on my laptop.
+
+![RealTime Sensor Data plot](https://i.imgur.com/refZYlZ.gif)
+
 
 ## Authors
 
