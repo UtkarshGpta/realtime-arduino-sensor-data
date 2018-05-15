@@ -2,6 +2,7 @@
 # RealTime Arduino Sensor Data
 
 The application aims at collecting sensor values from various sensors through Arduino Uno, sending them to a server (running NodeJS) and serving the clients a realtime plot of all the sensor values into one single plot.
+For Arduino Code, head to the following [gist](https://gist.github.com/UtkarshGpta/cbc7a899d3c6e1072db4b5f55e87b5a6).
 
 ## Getting Started
 
