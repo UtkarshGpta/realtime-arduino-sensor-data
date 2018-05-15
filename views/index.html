@@ -10,10 +10,9 @@
 	<div class="container">
 		<div class="text-center">
 			<h1>RealTime Sensor Data Dashboard</h1>
-			<button class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#chart" aria-expanded="false" aria-controls="collapseExample">Click here to view Real-Time Graph</button>
 		</div>
 		<br/>
-		<div class="collapse" id="chart">
+		<div id="chart">
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12">
@@ -51,6 +50,8 @@
 	<script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css"/>
 
+
+	<!--Change subscribe key here-->
 	<script type="text/javascript">
 		var __eon_pubnub = new PubNub({
 		  subscribeKey: "sub-c-3ca2653c-09dc-11e8-8425-92777572ae45"

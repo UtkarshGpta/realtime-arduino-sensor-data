@@ -28,7 +28,7 @@ In this mongo terminal, create a database which would be used to store the data 
 ```
 use <database naem of your choice>
 ```
-Store this database name in "config.db.name" in config.js file
+Store this database name in "config.db.name" in config.js file. Also change the subscribe key in views/index.html. Search for 'subscribeKey' and change with the value you obtained from your PubNub account.
 
 ### Installing
 
@@ -56,6 +56,7 @@ Example: http://localhost:5000/post_data?voltage=235&current=5.1&temperature=25
 ## Deployment
 Using above instructions, you get a server running locally. To deploy the application on Heroku, you need to add PubNub and mLab MongoDB as Add-ons under the resources tab. You need not harcode anything as the MongoDB URL, PubNub's Publish and Subscribe Key are taken up from process.env variable of Heroku. 
 Integrate GitHub as deployment method and you can deploy the application automatically as soon as you push your changes onto your repository on GitHub.
+
 ## Authors
 
 * **Utkarsh Gupta** - *Initial work* (https://github.com/UtkarshGpta)
